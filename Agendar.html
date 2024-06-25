@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar citas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos-all.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="shortcut icon" href="css/imagenes/logo.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="btn-menu">
+            <label for="btn-menu" class="icon-lista"></label>
+        </div>
+        <div class="logo">
+            <a href="index.html">
+                <img class="logo-img" src="css/imagenes/Limatambo-logo.png" title="Limatambo logo" alt="clinica limatambo" loading="lazy">
+            </a>
+        </div>
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="login.html">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="selec_doctor.html">Agenda tu cita</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="enfer_endo.html">Enfermedades Endocrinas</a>
+                <a href="enfer_respi.html">Enfermedades del Sistema Respiratorio</a>
+                <a href="enfer_diges.html">Enfermedades del Sistema Digestivo</a>
+                <a href="enfer_piel.html">Enfermedades de la piel</a>
+            </nav>
+            <label for="btn-menu" class="icon-equis"></label>
+        </div>
+    </div>
+    
+    <script>
+        // Función para obtener parámetros de la URL
+        function getQueryParams() {
+            let params = {};
+            let url = window.location.href;
+            let queryString = url.split('?')[1];
+            if (queryString) {
+                let pairs = queryString.split('&');
+                pairs.forEach(function(pair) {
+                    let [key, value] = pair.split('=');
+                    params[decodeURIComponent(key)] = decodeURIComponent(value);
+                });
+            }
+            return params;
+        }
+
+        // Función para mostrar los datos del doctor en la página
+        function mostrarDoctor() {
+            let params = getQueryParams();
+            document.getElementById('doctor-name').textContent = params.doctorNombre;
+            document.getElementById('doctor-photo').src = params.doctorFoto;
+        }
+
+        // Ejecutar la función al cargar la página
+        window.onload = mostrarDoctor;
+    </script>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Agendar Cita</h1>
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="" class="rounded-circle img-fluid mb-3" alt="Doctor's Photo" style="width: 150px;" id="doctor-photo">
+                <h2 class="card-title" id="doctor-name"></h2>
+            </div>
+        </div>
+        <form id="appointment-form">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="sexo">Sexo:</label>
+                    <select class="form-control" id="sexo" name="sexo" required>
+                        <option value="">Seleccionar</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion">
+            </div>
+            <div class="form-group">
+                <label>Selecciona un Horario:</label>
+                <div class="btn-group-toggle" data-toggle="buttons" id="horarios-container">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="consulta">Tipo de Consulta:</label>
+                    <input type="text" class="form-control" id="consulta" name="consulta">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Servicios Adicionales:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="analisis" name="servicio" value="análisis">
+                        <label class="custom-control-label" for="analisis">Análisis Clínicos</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="radiografia" name="servicio" value="radiografía">
+                        <label class="custom-control-label" for="radiografia">Radiografía</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Agendar Cita</button>
+        </form>
+    </div>
+    <footer class="text-center mt-5">
+        <p>&copy; 2024 Limatambo. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
